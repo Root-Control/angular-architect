@@ -1,0 +1,212 @@
+{
+   "app":{
+      "modules":[
+         {
+            "name":"layout",
+            "modules":[
+               {
+                  "name":"admin",
+                  "modules":[],
+                  "components":["admin-layout"]
+               },
+               {
+                  "name":"public",
+                  "modules":[],
+                  "components":["public-header","public-layout"]
+               }
+            ],
+            "components":[
+
+            ]
+         },
+         {
+            "name":"private",
+            "modules":[
+               {
+                  "name":"admin",
+                  "modules":[
+                     {
+                        "name":"articles",
+                        "service":true,
+                        "ngrx-feature": true,
+                        "components": ["articles-form", "articles-list", "articles-view"]
+                     },
+                     {
+                        "name":"coupons",
+                        "service":true,
+                        "ngrx-feature": true,
+                        "components": ["coupons-create-update", "list-coupons"]
+                     },
+                     {
+                        "name":"dashboard",
+                        "service":false,
+                        "components": ["dashboard", "home"]
+                     },
+                     {
+                        "name":"packages",
+                        "service":true,
+                        "ngrx-feature": true,
+                        "components": ["packages-form", "packages-list", "packages-view"]
+                     },
+                     {
+                        "name":"settings",
+                        "service":true,
+                        "ngrx-feature": true,
+                        "components": ["server-settings"]
+                     },
+                     {
+                        "name":"subscriptions",
+                        "service":true,
+                        "ngrx-feature": true,
+                        "components": ["subscriptions-list"]
+                     },
+                     {
+                        "name":"tips",
+                        "service":true,
+                        "ngrx-feature": true,
+                        "components": ["tips-form", "tips-list", "tips-view"]
+                     },
+                     {
+                        "name":"users",
+                        "service":true,
+                        "components": ["users-list"]
+                     }
+                  ],
+                  "components": []
+               },
+               {
+                  "name":"user",
+                  "modules": [
+                     {
+                        "name":"approvals",
+                        "service":true,
+                        "components": ["list-approvals"]
+                     },
+                     {
+                        "name":"chat",
+                        "service":true,
+                        "components": ["chat-window"]
+                     },
+                     {
+                        "name":"childrens",
+                        "service":true,
+                        "components": ["shared/new-children-modal"]
+                     },
+                     {
+                        "name":"contracts",
+                        "service":true,
+                        "components": ["contract-list", "contract-update", "contract-view", "contract-form"]
+                     },
+                     {
+                        "name":"coupons",
+                        "service":true,
+                        "components": []
+                     },
+                     {
+                        "name":"events",
+                        "service":true,
+                        "components": ["events-form", "events-view"]
+                     },
+                     {
+                        "name":"expenses",
+                        "service":true,
+                        "components": ["add-expense", "expense-detail", "expense-list"]
+                     },
+                     {
+                        "name":"feedbacks",
+                        "service":true,
+                        "components": []
+                     },
+                     {
+                        "name":"groupmembers",
+                        "service":true,
+                        "components": ["shared/newmember", "shared/single-parent-modal"]
+                     },
+                     {
+                        "name":"groups",
+                        "service":true,
+                        "components": ["group-calendar-view", "groups-form", "groups-list", "groups-view"]
+                     },
+                     {
+                        "name":"home",
+                        "service":true,
+                        "components": ["about", "balance-sheet-detalils", "dashboard", "home", "profile"]
+                     },
+                     {
+                        "name":"invitations",
+                        "service":true,
+                        "components": []
+                     },
+                     {
+                        "name":"membertypes",
+                        "service":true,
+                        "components": []
+                     },
+                     {
+                        "name":"notifications",
+                        "service":true,
+                        "components": []
+                     },
+                     {
+                        "name":"packages",
+                        "service":true,
+                        "components": []
+                     },
+                     {
+                        "name":"payment-customers",
+                        "service":true,
+                        "components": []
+                     },
+                     {
+                        "name":"payments",
+                        "service":true,
+                        "components": ["add-payment", "payment-list"]
+                     },
+                     {
+                        "name":"reports",
+                        "service":true,
+                        "components": ["reports"]
+                     },
+                     {
+                        "name":"scheduled-tasks",
+                        "service":true,
+                        "components": ["add-scheduled-task", "scheduled-task-detail"]
+                     },
+                     {
+                        "name":"users",
+                        "service":true,
+                        "components": ["users-password", "users-profile", "users-profile-picture"]
+                     }
+                  ]
+               }
+            ],
+            "components":[
+
+            ]
+         },
+         {
+            "name":"public",
+            "modules":[
+               {
+                  "name":"authentication",
+                  "components":["admin-login", "beta-register","forgot-password", "login", "password-reset", "register"],
+                  "service": true
+               }, 
+               {
+                  "name": "blog",
+                  "components": ["blog"],
+                  "service": true
+               },
+               {
+                  "name": "miscelaneous",
+                  "components": ["not-found", "server-error", "maintenance"],
+                  "service": false
+               }
+            ],
+            "components":[
+
+            ]
+         }
+      ]
+   }
+}

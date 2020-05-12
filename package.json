@@ -1,0 +1,25 @@
+{
+  "name": "angular-architect",
+  "version": "1.0.7",
+  "description": "Architect Scaffolding for Angular +8X Applications",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "angular-architect": "index.js"
+  },
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "pluralize": "^8.0.0"
+  },
+  "keywords": [
+    "Angular8",
+    "Angular9",
+    "Angular",
+    "Architecture",
+    "ngrx"
+  ],
+  "author": "Hiro Palacios Ponce",
+  "license": "ISC"
+}
