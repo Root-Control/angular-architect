@@ -1,0 +1,10 @@
+ToDo Angular-architect
+
+Fixes
+Arreglar error cuando no se ponen modulo vacío en el angular-architecture.json
+-  Si no se pone modules=[], todos los componentes se crearán en la base por defecto.
+
+Features
+- Los servicios creados deben ser atachados en el modulo donde se ha creado
+- Crear routing automatico si se añade a package.json
+

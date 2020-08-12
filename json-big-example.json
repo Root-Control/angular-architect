@@ -34,7 +34,6 @@
                      {
                         "name":"coupons",
                         "service":true,
-                        "ngrx-feature": true,
                         "components": ["coupons-create-update", "list-coupons"]
                      },
                      {
@@ -45,25 +44,21 @@
                      {
                         "name":"packages",
                         "service":true,
-                        "ngrx-feature": true,
                         "components": ["packages-form", "packages-list", "packages-view"]
                      },
                      {
                         "name":"settings",
                         "service":true,
-                        "ngrx-feature": true,
                         "components": ["server-settings"]
                      },
                      {
                         "name":"subscriptions",
                         "service":true,
-                        "ngrx-feature": true,
                         "components": ["subscriptions-list"]
                      },
                      {
                         "name":"tips",
                         "service":true,
-                        "ngrx-feature": true,
                         "components": ["tips-form", "tips-list", "tips-view"]
                      },
                      {

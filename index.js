@@ -36,7 +36,7 @@ async function start() {
 		await runNpmExec('ng add', '@ngrx/schematics');	
 		runNgCommand(command);
 	} catch (ex) {
-		console.log(chalk.red(ex.toUpperCase()));
+		console.log(chalk.red(ex));
 	}
 }
 
@@ -63,6 +63,7 @@ async function createModuleCommand(_module, parent, previousPath) {
 	}
 
 	if (_module.components && _module.components.length) {
+		parent = `${parent}/${_module.name}`;
 		await createComponentCommand(_module, parent, previousPath);
 	}
 

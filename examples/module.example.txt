@@ -1,0 +1,89 @@
+import { NgModule } from '@angular/core';      
+import { RouterModule } from '@angular/router';      
+import { CommonModule } from '@angular/common';      
+import { FormsModule } from '@angular/forms';      
+import { HolaModule } from '../../hiro-service/service';
+import { HiroClass } from '../../hiro-service/service';
+import { HiroClass } from '../../hiro-service/service';
+import { OmarClass } from '../../hiro-service/service';
+      
+/* Modules List */      
+import { EventsModule } from './events/events.module';      
+import { GroupMembersModule } from './groupmembers/groupmembers.module';      
+import { GroupsModule } from './groups/groups.module';      
+import { HomeModule } from './home/home.module';      
+import { InvitationsModule } from './invitations/invitations.module';      
+import { MembertypesModule } from './membertypes/membertypes.module';      
+import { NotificationsModule } from './notifications/notifications.module';      
+import { UsersModule } from './users/users.module';      
+import { ExpensesModule } from './expenses/expenses.module';      
+import { PaymentsModule } from './payments/payments.module';      
+import { ScheduledTasksModule } from './scheduled-tasks/scheduled-tasks.module';      
+import { ContractsModule } from './contracts/contracts.module';      
+import { ApprovalsModule } from './approvals/approvals.module';      
+import { ChatModule } from './chat/chat.module';      
+import { FeedbacksModule } from './feedbacks/feedbacks.module'      
+import { ReportsModule } from './reports';      
+import { PackagesModule } from './packages';      
+import { ChildrensModule } from './childrens';      
+import { CouponsModule } from './coupons';      
+import { PaymentGatewayModule } from './_payment-gateway';      
+import { PaymentCustomersModule } from './payment-customers';      
+    
+@NgModule({
+  imports: [
+    FormsModule,
+    CommonModule,
+    EventsModule,
+    GroupMembersModule,
+    GroupsModule,
+    HomeModule,
+    InvitationsModule,
+    MembertypesModule,
+    NotificationsModule,
+    UsersModule,
+    ExpensesModule,
+    PaymentsModule,
+    ScheduledTasksModule,
+    ContractsModule,
+    ApprovalsModule,
+    ChatModule,
+    FeedbacksModule,
+    ReportsModule,
+    PackagesModule,
+    ChildrensModule,
+    CouponsModule,
+    PaymentGatewayModule,
+    PaymentCustomersModule  ,
+  ],
+  exports: [
+    ABC  ,
+    HiroClass,
+    HiroClass,
+    OmarClass,
+  ],
+  providers: [
+    GHI  ,
+  ],
+  declarations: [
+    DEF  ,
+  ]
+})
+    
+export class UserModule { }      
+     
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+

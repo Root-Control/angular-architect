@@ -1,6 +1,6 @@
 {
   "name": "angular-architect",
-  "version": "1.0.7",
+  "version": "1.0.10",
   "description": "Architect Scaffolding for Angular +8X Applications",
   "main": "index.js",
   "scripts": {
@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "chalk": "^4.0.0",
+    "dirty-json": "^0.8.0",
+    "event-stream": "^4.0.1",
     "pluralize": "^8.0.0"
   },
   "keywords": [
