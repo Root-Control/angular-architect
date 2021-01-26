@@ -21,7 +21,7 @@
                   "name":"authentication",
                   "components":["admin-login", "beta-register","forgot-password", "login", "password-reset", "register"],
                   "service": true,
-                  "ngrx-feature": true,
+                  "ngrx-feature": true
                }, 
                {
                   "name": "blog",

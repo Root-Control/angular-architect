@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 'use strict';
+// require('dotenv').config()
 const path = require('path');
 let command = [];
 let string = '';
@@ -8,10 +9,13 @@ const cp = require('child_process');
 const pluralize = require('pluralize');
 const chalk = require('chalk');
 
+// const isDev = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'local' ;
+
 async function start() {
 	const basePath = process.cwd();
 
 	try {
+		//if (!isDev && !moduleIsAvailable(`${basePath}/angular.json`)) {
 		if (!moduleIsAvailable(`${basePath}/angular.json`)) {
 			throw 'You should apply this command in a valid angular path';
 		}
@@ -21,7 +25,7 @@ async function start() {
 			throw 'You should first create the angular-architecture.json file ';
 		}
 
-		const jsonFile = require(`${basePath}/angular.json`);
+		//  const jsonFile = require(`${basePath}/angular.json`);
 		const angularJson = require(`${basePath}/angular-architecture.json`);
 		const modules = angularJson.app.modules;
 
@@ -32,7 +36,10 @@ async function start() {
 		console.log('--Optional--');
 		console.log('--Getting Ngrx dependencies');
 
-		await runNpmExec('npm install','@ngrx/{store,effects,entity,store-devtools} --save');
+		await runNpmExec('npm install','@ngrx/store --save');
+		await runNpmExec('npm install','@ngrx/effects --save');
+		await runNpmExec('npm install','@ngrx/entity --save');
+		await runNpmExec('npm install','@ngrx/store-devtools --save');
 		await runNpmExec('ng add', '@ngrx/schematics');	
 		runNgCommand(command);
 	} catch (ex) {
@@ -53,7 +60,7 @@ async function createModuleCommand(_module, parent, previousPath) {
 	}
 
 	if (_module['ngrx-feature']) {
-		command.push(`ng g feature "${previousPath}/${_module.name}/${_module.name}" --module="${parent.replace(/app/, '')}/${_module.name}" --skipTest="true" --creators="true" --api="true"`);
+		command.push(`ng g feature "${previousPath}/${_module.name}/${_module.name}" --module="${parent.replace(/app/, '')}/${_module.name}" --creators="true" --api="true"`);
 	}
 
 	if(_module.modules) {
@@ -71,7 +78,8 @@ async function createModuleCommand(_module, parent, previousPath) {
 
 function createComponentCommand(_module, parent, previousPath) {
 	return _module.components.forEach(component => {
-		command.push(`ng g c "${previousPath}/${component}" --module="${parent}"`);
+		parent = parent.replace('app/', '');
+		command.push(`ng g c "${parent}/${component}" --module="${parent}"`);
 	});	
 }
 
@@ -82,6 +90,7 @@ async function runNgCommand(commandArray) {
 
 	for (let i = 0; i < commandArray.length; i++) {
 		console.log(`Processing  ${i+1} of ${commandArray.length} -> ${commandArray[i]} `);
+
 		await execute(commandArray[i]);
 	}
 }
