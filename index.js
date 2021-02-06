@@ -83,7 +83,7 @@ async function createModuleCommand(_module, parent, previousPath) {
 function createComponentCommand(_module, parent, previousPath) {
 	return _module.components.forEach(component => {
 		parent = parent.replace('app/', '');
-		command.push(`ng g c "${parent}/${component}" --module="${parent}" --skip-tests=true`);
+		command.push(`ng g c "${parent}/${parent.toLowerCase()}-${component}" --module="${parent}" --skip-tests=true`);
 	});	
 }
 
