@@ -36,10 +36,14 @@ async function start() {
 		console.log('--Optional--');
 		console.log('--Getting Ngrx dependencies');
 
-		await runNpmExec('npm install','@ngrx/store --save');
+		/* await runNpmExec('npm install','@ngrx/store --save');
 		await runNpmExec('npm install','@ngrx/effects --save');
 		await runNpmExec('npm install','@ngrx/entity --save');
-		await runNpmExec('npm install','@ngrx/store-devtools --save');
+		await runNpmExec('npm install','@ngrx/store-devtools --save'); */
+		await runNpmExec('ng add','@ngrx/store');
+		await runNpmExec('ng add','@ngrx/effects');
+		await runNpmExec('ng add','@ngrx/entity');
+		await runNpmExec('ng add','@ngrx/store-devtools');
 		await runNpmExec('ng add', '@ngrx/schematics');	
 		runNgCommand(command);
 	} catch (ex) {
@@ -56,11 +60,11 @@ async function createModuleCommand(_module, parent, previousPath) {
 	command.push(`ng g m "${previousPath}/${_module.name}" --module="${parent}"`);
 
 	if (_module.service) {
-		command.push(`ng g s "${previousPath}/${_module.name}/${_module.name}"`);
+		command.push(`ng g s "${previousPath}/${_module.name}/${_module.name} " --skip-tests=true`);
 	}
 
 	if (_module['ngrx-feature']) {
-		command.push(`ng g feature "${previousPath}/${_module.name}/${_module.name}" --module="${parent.replace(/app/, '')}/${_module.name}" --creators="true" --api="true"`);
+		command.push(`ng g feature "${previousPath}/${_module.name}/${_module.name}" --module="${parent.replace(/app/, '')}/${_module.name}" --creators="true" --skipTests="true" --api="true"`);
 	}
 
 	if(_module.modules) {
@@ -79,7 +83,7 @@ async function createModuleCommand(_module, parent, previousPath) {
 function createComponentCommand(_module, parent, previousPath) {
 	return _module.components.forEach(component => {
 		parent = parent.replace('app/', '');
-		command.push(`ng g c "${parent}/${component}" --module="${parent}"`);
+		command.push(`ng g c "${parent}/${component}" --module="${parent}" --skip-tests=true`);
 	});	
 }
 
