@@ -1,6 +1,6 @@
 {
   "name": "angular-architect",
-  "version": "1.1.18",
+  "version": "1.1.19",
   "description": "Architect Scaffolding for Angular +8X Applications",
   "main": "index.js",
   "scripts": {

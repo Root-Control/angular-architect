@@ -40,11 +40,11 @@ async function start() {
 		await runNpmExec('npm install','@ngrx/effects --save');
 		await runNpmExec('npm install','@ngrx/entity --save');
 		await runNpmExec('npm install','@ngrx/store-devtools --save'); */
-		await runNpmExec('ng add','@ngrx/store');
-		await runNpmExec('ng add','@ngrx/effects');
-		await runNpmExec('ng add','@ngrx/entity');
-		await runNpmExec('ng add','@ngrx/store-devtools');
-		await runNpmExec('ng add', '@ngrx/schematics');	
+		await runNpmExec('ng add','@ngrx/store@latest');
+		await runNpmExec('ng add','@ngrx/effects@latest');
+		await runNpmExec('ng add','@ngrx/entity@latest');
+		await runNpmExec('ng add','@ngrx/store-devtools@latest');
+		await runNpmExec('ng add', '@ngrx/schematics@latest');	
 		runNgCommand(command);
 	} catch (ex) {
 		console.log(chalk.red(ex));
