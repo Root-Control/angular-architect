@@ -5,44 +5,73 @@
             "name":"layout",
             "modules":[
                {
-                  "name":"admin",
-                  "modules":[],
-                  "components":["admin-layout"]
+                  "name":"private",
+                  "components":["layout", "header", "footer", "sidebar"]
+               }, {
+                   "name": "public",
+                   "components": ["layout", "header", "footer"]
+               }, {
+                   "name": "default",
+                   "components": ["layout", "header", "footer"],
+                   "modules": [{
+                     "name":"public2",
+                     "components":["layout", "header", "footer", "sidebar"]
+                  }]
                }
-            ],
-            "components":[
-
             ]
          },
          {
-            "name":"public",
+            "name":"private",
             "modules":[
-               {
-                  "name":"authentication",
-                  "components":["admin-login", "beta-register","forgot-password", "login", "password-reset", "register"],
-                  "service": true,
-                  "ngrx-feature": true
-               }, 
-               {
-                  "name": "blog",
-                  "components": ["blog"],
-                  "service": true,
-                  "ngrx-feature": true,
-                  "modules": [{
-                     "name": "other",
-                     "service": false,
-                     "modules": [{
-                        "name": "other2",
-                        "modules": [{
-                           "name": "nested"
-                        }]
-                     }]
-                  }]
-               }
-            ],
-            "components":[
-
-            ]
+                {
+               "name":"clients",
+               "service":true,
+               "ngrx-feature": true,
+               "components": ["create-update", "list", "view"]
+            }, {
+               "name":"modules",
+               "service":true,
+               "ngrx-feature": true,
+               "components": ["create-update", "list", "view"]
+           }, {
+               "name":"companies",
+               "service":true,
+               "ngrx-feature": true,
+               "components": ["create-update", "list", "view"]
+           }, {
+               "name":"projects",
+               "service":true,
+               "ngrx-feature": true,
+               "components": ["create-update", "list", "view"]
+           }, {
+               "name":"locations",
+               "service":true,
+               "ngrx-feature": true,
+               "components": ["create-update", "list", "view"]
+           }, {
+               "name":"ftps",
+               "service":true,
+               "ngrx-feature": true,
+               "components": ["create-update", "list", "view"]
+           }, {
+               "name":"users",
+               "service":true,
+               "ngrx-feature": true,
+               "components": ["create-update", "list", "view"]
+           }, {
+               "name":"devices",
+               "service":true,
+               "ngrx-feature": true,
+               "components": [
+                  "device-setup", 
+                  "shared/macro-operations",
+                  "shared/device-analog-inputs", 
+                  "shared/device-digital-inputs",
+                  "shared/device-digital-outputs",
+                  "shared/device-voltages",
+                  "shared/device-alarm-list"
+               ]
+           }]
          }
       ]
    }
