@@ -145,7 +145,7 @@ function createModuleCommands() {
 	return new Promise(resolve => {
 		modules.forEach(_module => {
 			fullPath = _module.path || '';
-			modulePathCommand = fullPath ? `--module=${fullPath}`: '';
+			modulePathCommand = fullPath ? `--module=${fullPath}`: '--module=app';
 			moduleCommands.push(`ng g module ${fullPath}/${_module.name} ${modulePathCommand}`);
 
 			if (_module.service) {
