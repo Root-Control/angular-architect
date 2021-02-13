@@ -132,7 +132,7 @@ function mapAllModules(path, modulesPath) {
 				type: types.MODULE
 			});
 	
-			if (_module.components) mapComponents(_module, item.name);
+			if (_module.components) mapComponents(_module, path);
 	
 			if (_module.modules && _module.modules.length) mapAllModules(`${path || ''}/${_module.name}`, _module.modules);
 		});
