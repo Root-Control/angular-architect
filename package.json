@@ -1,6 +1,6 @@
 {
   "name": "angular-architect",
-  "version": "2.0.7",
+  "version": "2.1.7",
   "description": "Architect Scaffolding for Angular +8X Applications",
   "main": "index.js",
   "scripts": {
@@ -17,8 +17,7 @@
     "pluralize": "^8.0.0"
   },
   "keywords": [
-    "Angular8",
-    "Angular9",
+    "AngularX",
     "Angular",
     "Architecture",
     "ngrx"

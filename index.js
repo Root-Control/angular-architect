@@ -17,6 +17,8 @@ let serviceCommands = [];
 let ngrxFeatureCommands = [];
 let componentCommands = [];
 
+let ngrx;
+
 const types = {
 	MODULE: 'module',
 	COMPONENT: 'component'
@@ -39,7 +41,9 @@ async function start() {
 
 		//  const jsonFile = require(`${basePath}/angular.json`);
 		const angularJson = require(`${basePath}/angular-architecture.json`);
+
 		const modules = angularJson.app.modules;
+		ngrx = angularJson.app.ngrx;
 
 		await mapAllModules(undefined, modules);
 		await createModuleCommands();
@@ -48,12 +52,14 @@ async function start() {
 		console.log('--Optional--');
 		console.log('--Getting Ngrx dependencies');
 
-		await runNpmExec('ng add','@ngrx/store@latest');
-		await runNpmExec('ng add','@ngrx/effects@latest');
-		await runNpmExec('ng add','@ngrx/entity@latest');
-		await runNpmExec('ng add','@ngrx/store-devtools@latest');
-		await runNpmExec('ng add', '@ngrx/schematics@latest');
-
+		if (ngrx) {
+			await runNpmExec('ng add','@ngrx/store@latest');
+			await runNpmExec('ng add','@ngrx/effects@latest');
+			await runNpmExec('ng add','@ngrx/entity@latest');
+			await runNpmExec('ng add','@ngrx/store-devtools@latest');
+			await runNpmExec('ng add', '@ngrx/schematics@latest');
+		}
+		
 		await runNgCommand(moduleCommands, 'module');
 		await runNgCommand(serviceCommands, 'service');
 		await runNgCommand(componentCommands, 'component');
@@ -64,12 +70,17 @@ async function start() {
 }
 
 async function runNgCommand(commandArray, type) {
+	const isNgrxFeature = type === 'ngrxFeature';
 	return new Promise(async resolve => {
 		console.log('-----------------------------------------------------------------------------');
 		console.log(chalk.green(`Running ${commandArray.length} ${type} COMMANDS`))
 		console.log('-----------------------------------------------------------------------------');
 	
 		for (let i = 0; i < commandArray.length; i++) {
+			if (isNgrxFeature && !ngrx) {
+				console.log(chalk.yellow(`Omiting ngrx process, ${i+1} of ${commandArray.length} -> ${commandArray[i]} (check your json and add app.ngrx = true instead)`));
+				resolve();
+			}
 			console.log(chalk.yellow(`Processing  ${i+1} of ${commandArray.length} -> ${commandArray[i]} `));
 	
 			await execute(commandArray[i]);
@@ -112,27 +123,35 @@ function isModuleAvailable (path) {
 
 function mapAllModules(path, modulesPath) {
 	return new Promise(resolve => {
-		modulesPath.forEach(item => {
+		modulesPath.forEach(_module => {
 			modules.push({ 
-				name: item.name, 
-				ngrx: item['ngrx-feature'] || false,
-				service: item.service || false,
+				name: _module.name, 
+				ngrx: _module['ngrx-feature'] || false,
+				service: _module.service || false,
 				path,
 				type: types.MODULE
 			});
 	
-			if (item.components) mapComponents(item.name, path, item.components);
+			if (_module.components) mapComponents(_module, item.name);
 	
-			if (item.modules && item.modules.length) mapAllModules(`${path || ''}/${item.name}`, item.modules);
+			if (_module.modules && _module.modules.length) mapAllModules(`${path || ''}/${_module.name}`, _module.modules);
 		});
 		resolve();
 	});
 }
 
-function mapComponents(moduleName, path, moduleComponents) {
+/**
+ * 
+ * @param {*} _module 
+ * @param {*} path 
+ */
+function mapComponents(_module, path) {
+	const moduleName = _module.mame;
+	const moduleComponents = _module.components;
+
 	moduleComponents.forEach(component => {
 		components.push({ 
-			name: `${moduleName}-${component}`, 
+			name: `${_module['component-prefix'] ? moduleName: ''}-${component}`, 
 			path: `${path}/${moduleName}`, 
 			type: types.COMPONENT
 		}) 
