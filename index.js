@@ -146,7 +146,7 @@ function mapAllModules(path, modulesPath) {
  * @param {*} path 
  */
 function mapComponents(_module, path) {
-	const moduleName = _module.mame;
+	const moduleName = _module.name;
 	const moduleComponents = _module.components;
 
 	moduleComponents.forEach(component => {
