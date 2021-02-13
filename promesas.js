@@ -18,27 +18,35 @@ const types = {
 
 function mapAllModules(path, modulesPath) {
 	return new Promise(resolve => {
-		modulesPath.forEach(item => {
+		modulesPath.forEach(_module => {
 			modules.push({ 
-				name: item.name, 
-				ngrx: item['ngrx-feature'] || false,
-				service: item.service || false,
+				name: _module.name, 
+				ngrx: _module['ngrx-feature'] || false,
+				service: _module.service || false,
 				path,
 				type: types.MODULE
 			});
 	
-			if (item.components) mapComponents(item.name, path, item.components);
+			if (_module.components) mapComponents(_module, path);
 	
-			if (item.modules && item.modules.length) mapAllModules(`${path || ''}/${item.name}`, item.modules);
+			if (_module.modules && _module.modules.length) mapAllModules(`${path || ''}/${_module.name}`, _module.modules);
 		});
 		resolve();
 	});
 }
 
-function mapComponents(moduleName, path, moduleComponents) {
+/**
+ * 
+ * @param {*} _module 
+ * @param {*} path 
+ */
+function mapComponents(_module, path) {
+	const moduleName = _module.name;
+	const moduleComponents = _module.components;
+
 	moduleComponents.forEach(component => {
 		components.push({ 
-			name: `${moduleName}-${component}`, 
+			name: `${_module['component-prefix'] ? moduleName + '-': ''}${component}`, 
 			path: `${path}/${moduleName}`, 
 			type: types.COMPONENT
 		}) 
@@ -51,11 +59,12 @@ function createModuleCommands() {
 	return new Promise(resolve => {
 		modules.forEach(_module => {
 			fullPath = _module.path || '';
-			modulePathCommand = fullPath ? `--module=${fullPath}`: '';
+			modulePathCommand = fullPath ? `--module=${fullPath}`: '--module=app';
 			moduleCommands.push(`ng g module ${fullPath}/${_module.name} ${modulePathCommand}`);
 
 			if (_module.service) {
-				serviceCommands.push(`ng g s ${fullPath}/${_module.name} --skip-tests=true`);
+				const serviceName = _module.name;
+				serviceCommands.push(`ng g s ${fullPath}/${_module.name}/${serviceName} --skip-tests=true`);
 			}
 
 			if (_module.ngrx) {
@@ -82,7 +91,7 @@ async function start() {
 	await mapAllModules(undefined, data.app.modules);
 	await createModuleCommands();
 	await createComponentCommands();
-	console.log(ngrxFeatureCommands);
+	//console.log(componentCommands);
 }
 
 start();

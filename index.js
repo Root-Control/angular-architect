@@ -151,7 +151,7 @@ function mapComponents(_module, path) {
 
 	moduleComponents.forEach(component => {
 		components.push({ 
-			name: `${_module['component-prefix'] ? moduleName: ''}-${component}`, 
+			name: `${_module['component-prefix'] ? moduleName + '-': ''}${component}`, 
 			path: `${path}/${moduleName}`, 
 			type: types.COMPONENT
 		}) 
